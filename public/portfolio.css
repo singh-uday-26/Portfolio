@@ -1,0 +1,727 @@
+
+/* 
+   CSS RESET - Clearing default browser styles 
+   This ensures consistent appearance across different browsers
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 
+   BASE STYLES AND VARIABLES
+   Defining colors, fonts, and other variables for consistent styling
+*/
+:root {
+    /* Color palette */
+    --primary-color: #2563eb;      /* Blue for primary elements */
+    --primary-dark: #1d4ed8;       /* Darker blue for hover states */
+    --secondary-color: #f8fafc;    /* Light gray for alternating sections */
+    --text-color: #334155;         /* Dark gray for main text */
+    --text-light: #64748b;         /* Lighter gray for secondary text */
+    --accent-color: #3b82f6;       /* Accent blue for highlights */
+    --white: #ffffff;
+    --black: #0f172a;
+    --card-bg: #ffffff;
+    --timeline-color: #cbd5e1;
+    --tag-bg: #e0f2fe;
+    --tag-color: #0369a1;
+    
+    /* Spacing variables */
+    --section-padding: 5rem 0;
+    --container-padding: 0 2rem;
+    
+    /* Border radius for rounded elements */
+    --border-radius: 0.5rem;
+    
+    /* Transition speed for hover effects */
+    --transition-speed: 0.3s;
+}
+
+/* 
+   TYPOGRAPHY 
+   Setting up the base font and text styles
+*/
+body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+/* 
+   CONTAINER 
+   Center-aligns and constrains content width
+*/
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--container-padding);
+}
+
+/* 
+   NAVBAR STYLES
+   Styling for the fixed navigation bar
+*/
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 1000;
+    transition: all var(--transition-speed) ease;
+}
+
+/* Navbar states: transparent and solid */
+nav[data-nav-transparent="true"] {
+    background-color: transparent;
+}
+
+nav[data-nav-transparent="false"] {
+    background-color: var(--white);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar container for flexbox positioning */
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+/* Navigation menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 1.5rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* 
+   MOBILE MENU TOGGLE
+   Hamburger icon for mobile navigation
+*/
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+}
+
+/* 
+   HERO SECTION 
+   Full-height intro section with background image/gradient
+*/
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: var(--white);
+    padding-top: 60px; /* Space for navbar */
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+}
+
+/* 
+   BUTTONS 
+   Styling for call-to-action buttons
+*/
+.hero-buttons {
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    margin: 0 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--white);
+    color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--white);
+    border: 2px solid var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-3px);
+}
+
+/* 
+   SECTION STYLES 
+   Common styling for content sections
+*/
+.section {
+    padding: var(--section-padding);
+    overflow: hidden;
+}
+
+.section-alt {
+    background-color: var(--secondary-color);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    color: var(--black);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* 
+   ABOUT SECTION 
+   Grid layout for about content and details
+*/
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.about-content h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.details-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.details-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.details-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.detail-value {
+    margin-top: 0.25rem;
+}
+
+.detail-value a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+.detail-value a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* 
+   EDUCATION SECTION 
+   Styling for education cards
+*/
+.edu-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+}
+
+.edu-year {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.edu-degree {
+    margin-bottom: 0.5rem;
+}
+
+.edu-gpa {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.edu-courses h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+/* 
+   EXPERIENCE SECTION 
+   Timeline layout for work history
+*/
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 2px;
+    background-color: var(--timeline-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 50px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 16px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    z-index: 1;
+}
+
+.timeline-content {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-date {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-position {
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.timeline-details {
+    list-style-position: inside;
+    padding-left: 1rem;
+}
+
+.timeline-details li {
+    margin-bottom: 0.5rem;
+}
+
+/* 
+   PROJECTS SECTION 
+   Grid layout for project cards
+*/
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 0.5rem;
+}
+
+.tag {
+    background-color: var(--tag-bg);
+    color: var(--tag-color);
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 1rem;
+}
+
+/* 
+   SKILLS SECTION 
+   Grid layout for skills categories
+*/
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.skills-column h3 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.skill-category {
+    margin-bottom: 1.5rem;
+}
+
+.skill-category h4 {
+    margin-bottom: 0.75rem;
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skills-list, .cert-list {
+    list-style-position: inside;
+    margin-bottom: 1.5rem;
+}
+
+.skills-list li, .cert-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.skills-list li::before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+}
+
+.cert-list li span {
+    font-weight: 600;
+}
+
+/* 
+   CONTACT SECTION 
+   Styling for contact information and links
+*/
+.contact-section {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: var(--white);
+}
+
+.contact-section .section-title::after {
+    background-color: var(--white);
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.contact-method {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    color: var(--white);
+    transition: background-color var(--transition-speed) ease;
+}
+
+.contact-method:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.method-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.contact-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--white);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+}
+
+.contact-link:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* 
+   FOOTER 
+   Simple footer styling
+*/
+.footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+/* 
+   ANIMATIONS
+   CSS animations for fade-in effects
+*/
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Staggered delay for multiple fade-in elements */
+.fade-in:nth-child(1) { animation-delay: 0.2s; }
+.fade-in:nth-child(2) { animation-delay: 0.4s; }
+.fade-in:nth-child(3) { animation-delay: 0.6s; }
+.fade-in:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 
+   MEDIA QUERIES
+   Responsive design adjustments for different screen sizes
+*/
+@media (max-width: 992px) {
+    .about-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .about-content {
+        order: 1;
+    }
+    
+    .about-details {
+        order: 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.8rem;
+    }
+    
+    .edu-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .edu-year {
+        margin-top: 0.25rem;
+    }
+    
+    .contact-methods {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Show mobile menu toggle */
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background-color: var(--white);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+        padding: 1.5rem 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 2rem 0;
+    }
+    
+    /* Animated hamburger menu */
+    .menu-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .menu-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .menu-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2.3rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        display: block;
+        margin: 0.5rem 0;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
