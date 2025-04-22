@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
     <!-- Navigation Bar -->
     <nav id="navbar" data-nav-transparent="true">
         <div class="container">
-            <a href="#" class="logo">US.</a>
+            <a href="#" class="logo">US<span class="text-gradient">.</span></a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -32,14 +31,16 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Stripe-inspired design -->
+    <!-- Hero Section with enhanced gradient design -->
     <section id="home" class="hero">
-        <div class="gradient-bg"></div>
+        <div class="gradient-overlay"></div>
+        <div class="hero-bg-pattern"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="fade-in">Hello, I'm Uday Singh</h1>
-                <h2 class="fade-in">Computer Science Undergraduate</h2>
-                <p class="fade-in">Building the future through code and innovation</p>
+                <div class="hero-badge">Computer Science Undergraduate</div>
+                <h1 class="fade-in">Building The Future<br/>Through Code</h1>
+                <h2 class="fade-in">Hi, I'm Uday Singh</h2>
+                <p class="fade-in">Transforming ideas into elegant solutions through innovative software development</p>
                 <div class="hero-buttons fade-in">
                     <a href="#projects" class="btn btn-primary">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Get in Touch</a>
@@ -96,20 +97,30 @@
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education Section with enhanced card design -->
     <section id="education" class="section section-alt">
         <div class="container">
-            <h2 class="section-title">Education</h2>
+            <h2 class="section-title">Education Journey</h2>
             <div class="edu-card">
-                <div class="edu-header">
-                    <h3>Vellore Institute of Technology (VIT-AP University)</h3>
-                    <span class="edu-year">2023 - 2027</span>
+                <div class="edu-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
                 </div>
-                <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
-                <p class="edu-gpa">CGPA: 8.21</p>
-                <div class="edu-courses">
-                    <h4>Key Areas of Focus:</h4>
-                    <p>Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Software Engineering</p>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <h3>Vellore Institute of Technology (VIT-AP University)</h3>
+                        <span class="edu-year">2023 - 2027</span>
+                    </div>
+                    <p class="edu-degree">B.Tech in Computer Science and Engineering</p>
+                    <p class="edu-gpa">CGPA: 8.21</p>
+                    <div class="edu-courses">
+                        <h4>Core Focus Areas</h4>
+                        <div class="course-tags">
+                            <span class="tag">Data Structures & Algorithms</span>
+                            <span class="tag">Object-Oriented Programming</span>
+                            <span class="tag">Database Systems</span>
+                            <span class="tag">Software Engineering</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -167,14 +178,17 @@
         </div>
     </section>
 
-    <!-- Projects Section with updated styling -->
+    <!-- Projects Section with enhanced grid layout -->
     <section id="projects" class="section section-alt">
         <div class="container">
-            <h2 class="section-title">Projects & Research</h2>
+            <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-content">
-                        <h3>Image Classification System</h3>
+                        <div class="project-header">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="project-icon"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                            <h3>Image Classification System</h3>
+                        </div>
                         <p>Developed a CNN-based image classification system achieving 95% accuracy through advanced deep learning techniques.</p>
                         <div class="project-tags">
                             <span class="tag">Python</span>
