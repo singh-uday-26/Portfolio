@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to handle the scroll animation effect
     function handleScrollAnimation() {
         sections.forEach(section => {
-            if (isInViewport(section)) {
+            if (isInViewport(section) && !section.classList.contains('fade-in')) {
                 section.classList.add('fade-in');
             }
         });
@@ -134,6 +134,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentYear = new Date().getFullYear();
         footerCopyright.textContent = `© ${currentYear} Uday Singh. All rights reserved.`;
     }
+    
+    /**
+     * PERFORMANCE OPTIMIZATION
+     * Uses requestAnimationFrame for smoother animations
+     */
+    let scrollTimeout;
+    
+    // Throttled scroll handler to improve performance
+    window.addEventListener('scroll', function() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(function() {
+                scrollTimeout = null;
+                requestAnimationFrame(function() {
+                    handleScroll();
+                    handleScrollAnimation();
+                });
+            }, 20);
+        }
+    });
     
     /**
      * INIT FUNCTION
