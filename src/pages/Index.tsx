@@ -1,9 +1,13 @@
+
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Github, Linkedin, Mail, Code, FileText } from "lucide-react";
 import SkillTag from "@/components/SkillTag";
 import EducationCard from "@/components/EducationCard";
+import MobileMenu from "@/components/MobileMenu";
+import ProjectCard from "@/components/ProjectCard";
+import ContactForm from "@/components/ContactForm";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
