@@ -1,29 +1,807 @@
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Github, Linkedin, Mail, Code, FileText } from "lucide-react";
 
 const Index = () => {
-  // Redirect to the pure HTML/CSS/JS version
+  const [activeSection, setActiveSection] = useState('home');
+  
+  // Handle scroll to update active section
   useEffect(() => {
-    // Use a short timeout to ensure the redirection happens after the component mounts
-    const redirectTimer = setTimeout(() => {
-      window.location.href = '/portfolio.html';
-    }, 100);
-    
-    // Clean up timer on unmount
-    return () => clearTimeout(redirectTimer);
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('section[id]');
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const sectionId = section.getAttribute('id');
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          setActiveSection(sectionId || 'home');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-white">
-      <div className="text-center p-8 max-w-md mx-auto bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4 text-indigo-700">Redirecting to Portfolio...</h1>
-        <p className="mb-6 text-gray-600">If you are not redirected automatically, please click the link below:</p>
-        <a 
-          href="/portfolio.html" 
-          className="inline-block px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors"
-        >
-          Go to Portfolio
-        </a>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <a href="#" className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">US<span className="text-gradient">.</span></a>
+          
+          <div className="hidden md:flex items-center space-x-8">
+            <button 
+              onClick={() => scrollToSection('home')} 
+              className={`nav-link ${activeSection === 'home' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => scrollToSection('about')} 
+              className={`nav-link ${activeSection === 'about' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              About
+            </button>
+            <button 
+              onClick={() => scrollToSection('education')} 
+              className={`nav-link ${activeSection === 'education' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Education
+            </button>
+            <button 
+              onClick={() => scrollToSection('experience')} 
+              className={`nav-link ${activeSection === 'experience' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Experience
+            </button>
+            <button 
+              onClick={() => scrollToSection('projects')} 
+              className={`nav-link ${activeSection === 'projects' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => scrollToSection('skills')} 
+              className={`nav-link ${activeSection === 'skills' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Skills
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')} 
+              className={`nav-link ${activeSection === 'contact' ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Contact
+            </button>
+          </div>
+          
+          <div className="md:hidden">
+            <MobileMenu scrollToSection={scrollToSection} activeSection={activeSection} />
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" className="pt-32 pb-20 min-h-screen flex items-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-radial from-indigo-100/30 to-transparent dark:from-indigo-900/10"></div>
+        <div className="absolute inset-0 bg-pattern opacity-[0.015] dark:opacity-[0.03]"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-block bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-300 px-4 py-2 rounded-full text-sm font-medium mb-8 animate-fade-in">
+              Computer Science Undergraduate
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent animate-fade-in">
+              Building The Future<br/>Through Code
+            </h1>
+            
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-slate-700 dark:text-slate-300 animate-fade-in">
+              Hi, I'm Uday Singh
+            </h2>
+            
+            <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto animate-fade-in">
+              Transforming ideas into elegant solutions through innovative software development
+            </p>
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in">
+              <button 
+                onClick={() => scrollToSection('projects')}
+                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-md transition-all transform hover:-translate-y-1"
+              >
+                View Projects
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="px-6 py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-indigo-700 text-slate-800 dark:text-slate-200 font-medium rounded-md transition-all transform hover:-translate-y-1"
+              >
+                Get in Touch
+              </button>
+            </div>
+            
+            <div className="mt-12 flex justify-center gap-6">
+              <a href="https://github.com/udaysingh2626" target="_blank" rel="noreferrer" className="text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                <Github size={24} />
+              </a>
+              <a href="https://linkedin.com/in/udaysingh2626" target="_blank" rel="noreferrer" className="text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                <Linkedin size={24} />
+              </a>
+              <a href="mailto:udaysingh240818@gmail.com" className="text-slate-600 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 transition-colors">
+                <Mail size={24} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800 dark:text-slate-200">
+            About Me
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-10">
+            <div className="md:col-span-2">
+              <h3 className="text-2xl font-semibold mb-4 text-indigo-600 dark:text-indigo-400">Professional Summary</h3>
+              <p className="text-slate-700 dark:text-slate-300 mb-6">
+                Computer Science undergraduate with a passion for building innovative solutions 
+                and solving complex problems. Focused on developing scalable applications 
+                and exploring cutting-edge technologies.
+              </p>
+              <p className="text-slate-700 dark:text-slate-300">
+                Actively engaged in competitive programming, open-source contributions, 
+                and technical community building at VIT-AP University.
+              </p>
+            </div>
+            
+            <div className="md:col-span-1">
+              <Card className="h-full">
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Personal Details</h3>
+                  <ul className="space-y-4">
+                    <li className="flex flex-col">
+                      <span className="text-sm text-slate-500 dark:text-slate-400">Location</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">Saharanpur, Uttar Pradesh, India</span>
+                    </li>
+                    <li className="flex flex-col">
+                      <span className="text-sm text-slate-500 dark:text-slate-400">Email</span>
+                      <a href="mailto:udaysingh240818@gmail.com" className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
+                        udaysingh240818@gmail.com
+                      </a>
+                    </li>
+                    <li className="flex flex-col">
+                      <span className="text-sm text-slate-500 dark:text-slate-400">Phone</span>
+                      <span className="font-medium text-slate-800 dark:text-slate-200">+91-81268-52998</span>
+                    </li>
+                    <li className="flex flex-col">
+                      <span className="text-sm text-slate-500 dark:text-slate-400">LinkedIn</span>
+                      <a href="https://linkedin.com/in/udaysingh2626" target="_blank" rel="noreferrer" className="font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300">
+                        linkedin.com/in/udaysingh2626
+                      </a>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Education Section */}
+      <section id="education" className="py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800 dark:text-slate-200">
+            Education Journey
+          </h2>
+          
+          <div className="max-w-3xl mx-auto">
+            <Card className="relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-500 to-purple-500"></div>
+              <CardContent className="p-6 ml-4">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
+                    Vellore Institute of Technology (VIT-AP University)
+                  </h3>
+                  <span className="mt-1 md:mt-0 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full">
+                    2023 - 2027
+                  </span>
+                </div>
+                <p className="text-lg font-medium mb-1 text-slate-700 dark:text-slate-300">
+                  B.Tech in Computer Science and Engineering
+                </p>
+                <p className="text-slate-600 dark:text-slate-400 mb-6">
+                  CGPA: 8.21
+                </p>
+                <div>
+                  <h4 className="text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Core Focus Areas</h4>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                      Data Structures & Algorithms
+                    </span>
+                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                      Object-Oriented Programming
+                    </span>
+                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                      Database Systems
+                    </span>
+                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                      Software Engineering
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800 dark:text-slate-200">
+            Experience
+          </h2>
+          
+          <div className="max-w-3xl mx-auto relative">
+            {/* Timeline center line */}
+            <div className="absolute left-0 md:left-1/2 top-0 h-full w-px bg-slate-200 dark:bg-slate-700 transform md:-translate-x-1/2"></div>
+            
+            {/* Experience Item 1 */}
+            <div className="relative mb-12">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="w-full md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                  <h3 className="text-xl font-semibold mb-1 text-slate-800 dark:text-slate-200">Smart India Hackathon (SIH)</h3>
+                  <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full mb-2">2024</span>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">Team Developer - Government of India</p>
+                </div>
+                
+                <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-indigo-600 dark:bg-indigo-500 rounded-full transform md:-translate-x-1/2 flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                
+                <div className="w-full md:w-1/2 md:pl-12">
+                  <Card className="h-full">
+                    <CardContent className="p-4">
+                      <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 space-y-2">
+                        <li>Collaborated in a high-pressure environment to build a complete software solution.</li>
+                        <li>Practiced Agile, sprint planning, and version control tools for rapid deployment.</li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+            
+            {/* Experience Item 2 */}
+            <div className="relative mb-12">
+              <div className="flex flex-col md:flex-row-reverse items-center">
+                <div className="w-full md:w-1/2 md:pl-12 mb-6 md:mb-0">
+                  <h3 className="text-xl font-semibold mb-1 text-slate-800 dark:text-slate-200">Microsoft Hackathon (MSC - VITAP)</h3>
+                  <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full mb-2">2024</span>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">Hackathon Participant - Microsoft Student Chapter</p>
+                </div>
+                
+                <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-indigo-600 dark:bg-indigo-500 rounded-full transform md:-translate-x-1/2 flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                
+                <div className="w-full md:w-1/2 md:pr-12 md:text-right">
+                  <Card className="h-full">
+                    <CardContent className="p-4">
+                      <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 space-y-2 md:list-outside">
+                        <li>Contributed to a team-based project emphasizing collaboration, documentation, and clean code.</li>
+                        <li>Focused on user-centered design and scalable application architecture.</li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+            
+            {/* Experience Item 3 */}
+            <div className="relative">
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="w-full md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                  <h3 className="text-xl font-semibold mb-1 text-slate-800 dark:text-slate-200">Microsoft Student Chapter (MSC) - VIT-AP</h3>
+                  <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full mb-2">2023 - 2024</span>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">Tech Mentor & Event Coordinator</p>
+                </div>
+                
+                <div className="absolute left-0 md:left-1/2 w-8 h-8 bg-indigo-600 dark:bg-indigo-500 rounded-full transform md:-translate-x-1/2 flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                
+                <div className="w-full md:w-1/2 md:pl-12">
+                  <Card className="h-full">
+                    <CardContent className="p-4">
+                      <ul className="list-disc list-inside text-slate-700 dark:text-slate-300 space-y-2">
+                        <li>Led technical workshops; mentored peers in project planning and communication skills.</li>
+                        <li>Organized hackathons and seminars, enhancing stakeholder coordination and leadership.</li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-24">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 text-slate-800 dark:text-slate-200">
+            Featured Projects
+          </h2>
+          
+          <p className="text-center mb-16 max-w-2xl mx-auto text-slate-600 dark:text-slate-400">
+            A showcase of my technical projects, focusing on innovative solutions and clean code implementation.
+          </p>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Project Card 1 */}
+            <ProjectCard
+              title="Image Classification System"
+              description="Developed a CNN-based image classification system achieving 95% accuracy through advanced deep learning techniques."
+              tags={["Python", "TensorFlow", "Deep Learning"]}
+              icon={<Code size={24} className="text-indigo-500" />}
+            />
+            
+            {/* Project Card 2 */}
+            <ProjectCard
+              title="Full-Stack Social Platform"
+              description="Built a scalable social media platform with real-time features and robust authentication system."
+              tags={["Node.js", "React", "MongoDB"]}
+              icon={<Code size={24} className="text-indigo-500" />}
+            />
+            
+            {/* Project Card 3 */}
+            <ProjectCard
+              title="Algorithmic Trading Bot"
+              description="Created an automated trading system using machine learning for market prediction and portfolio optimization."
+              tags={["Python", "ML", "API Integration"]}
+              icon={<Code size={24} className="text-indigo-500" />}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800 dark:text-slate-200">
+            Core Skills
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <Tabs defaultValue="technical" className="w-full">
+              <TabsList className="w-full flex mb-8">
+                <TabsTrigger value="technical" className="flex-1">
+                  Technical Skills
+                </TabsTrigger>
+                <TabsTrigger value="soft" className="flex-1">
+                  Soft Skills
+                </TabsTrigger>
+                <TabsTrigger value="certifications" className="flex-1">
+                  Certifications
+                </TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="technical" className="p-4">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Programming Languages</h3>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      <SkillTag name="Python" level={90} />
+                      <SkillTag name="R" level={75} />
+                      <SkillTag name="Java" level={85} />
+                      <SkillTag name="SQL" level={80} />
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Web Development</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <SkillTag name="HTML/CSS" level={85} />
+                      <SkillTag name="JavaScript" level={82} />
+                      <SkillTag name="React" level={78} />
+                      <SkillTag name="Node.js" level={75} />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Tools & Technologies</h3>
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      <SkillTag name="Git" level={88} />
+                      <SkillTag name="Docker" level={70} />
+                      <SkillTag name="AWS" level={65} />
+                      <SkillTag name="JIRA" level={75} />
+                    </div>
+                    
+                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Databases</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <SkillTag name="MySQL" level={85} />
+                      <SkillTag name="MongoDB" level={75} />
+                      <SkillTag name="PostgreSQL" level={70} />
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="soft">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <Card>
+                    <CardContent className="p-6">
+                      <ul className="space-y-3">
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Clear Communication</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Analytical Thinking</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Research</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardContent className="p-6">
+                      <ul className="space-y-3">
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Presentation</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Team Collaboration</span>
+                        </li>
+                        <li className="flex items-center">
+                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
+                          <span className="text-slate-700 dark:text-slate-300">Problem Solving</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="certifications">
+                <div className="space-y-4">
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">Business Communication</h3>
+                      <p className="text-slate-600 dark:text-slate-400">Coursera</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">Excel for Business: Essentials</h3>
+                      <p className="text-slate-600 dark:text-slate-400">Macquarie University</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card>
+                    <CardContent className="p-6">
+                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">HR Management Foundations</h3>
+                      <p className="text-slate-600 dark:text-slate-400">LinkedIn Learning</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+            Get In Touch
+          </h2>
+          
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+              
+              <div className="space-y-4">
+                <a 
+                  href="mailto:udaysingh240818@gmail.com" 
+                  className="flex items-center p-4 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <Mail className="mr-3" size={20} />
+                  <div>
+                    <p className="text-sm opacity-75">Email</p>
+                    <p className="font-medium">udaysingh240818@gmail.com</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="https://linkedin.com/in/udaysingh2626" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center p-4 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <Linkedin className="mr-3" size={20} />
+                  <div>
+                    <p className="text-sm opacity-75">LinkedIn</p>
+                    <p className="font-medium">linkedin.com/in/udaysingh2626</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="https://github.com/udaysingh2626" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex items-center p-4 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <Github className="mr-3" size={20} />
+                  <div>
+                    <p className="text-sm opacity-75">GitHub</p>
+                    <p className="font-medium">github.com/udaysingh2626</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="tel:+918126852998" 
+                  className="flex items-center p-4 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <div className="mr-3">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm opacity-75">Phone</p>
+                    <p className="font-medium">+91-81268-52998</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+              <ContactForm />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 bg-slate-900 text-white text-center">
+        <div className="container mx-auto px-4">
+          <p className="mb-4">© {new Date().getFullYear()} Uday Singh. All rights reserved.</p>
+          <div className="flex justify-center gap-6">
+            <a href="https://github.com/udaysingh2626" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">
+              <Github size={20} />
+            </a>
+            <a href="https://linkedin.com/in/udaysingh2626" target="_blank" rel="noreferrer" className="hover:text-indigo-400 transition-colors">
+              <Linkedin size={20} />
+            </a>
+            <a href="#" className="hover:text-indigo-400 transition-colors">
+              <FileText size={20} />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+// SkillTag component
+const SkillTag = ({ name, level }: { name: string; level: number }) => {
+  return (
+    <div className="group relative">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full opacity-75 group-hover:opacity-100 blur transition duration-200 group-hover:duration-200"></div>
+      <div className="px-3 py-1 bg-white dark:bg-slate-800 rounded-full relative flex items-center">
+        <span className="text-slate-700 dark:text-slate-300 text-sm">{name}</span>
+        <div className="w-1 h-1 bg-slate-400 rounded-full mx-2"></div>
+        <div className="h-1.5 w-12 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full" 
+            style={{ width: `${level}%` }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ProjectCard component
+const ProjectCard = ({ title, description, tags, icon }: { title: string; description: string; tags: string[]; icon: React.ReactNode }) => {
+  return (
+    <Card className="h-full hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+      <CardContent className="p-6 flex flex-col h-full">
+        <div className="flex items-center mb-4">
+          {icon}
+          <h3 className="text-xl font-semibold ml-2 text-slate-800 dark:text-slate-200">{title}</h3>
+        </div>
+        <p className="text-slate-600 dark:text-slate-400 mb-6 flex-grow">{description}</p>
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {tags.map((tag) => (
+            <span key={tag} className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs rounded">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+// Contact Form component
+const ContactForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      console.log('Form submitted:', { name, email, message });
+      setIsSubmitting(false);
+      setSubmitted(true);
+      setName('');
+      setEmail('');
+      setMessage('');
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    }, 1500);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:border-white/40 focus:outline-none focus:ring-0 placeholder-white/60 text-white"
+        />
+      </div>
+      
+      <div>
+        <input
+          type="email"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:border-white/40 focus:outline-none focus:ring-0 placeholder-white/60 text-white"
+        />
+      </div>
+      
+      <div>
+        <textarea
+          placeholder="Your Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+          rows={4}
+          className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 focus:border-white/40 focus:outline-none focus:ring-0 placeholder-white/60 text-white resize-none"
+        ></textarea>
+      </div>
+      
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className={`w-full py-2 rounded-lg font-medium transition-all ${
+          isSubmitting 
+            ? 'bg-white/50 cursor-not-allowed' 
+            : 'bg-white hover:bg-opacity-90 text-indigo-700'
+        }`}
+      >
+        {isSubmitting ? 'Sending...' : submitted ? 'Message Sent!' : 'Send Message'}
+      </button>
+      
+      {submitted && (
+        <p className="text-white/80 text-center">
+          Thank you for your message! I'll get back to you soon.
+        </p>
+      )}
+    </form>
+  );
+};
+
+// Mobile Menu component
+const MobileMenu = ({ scrollToSection, activeSection }: { scrollToSection: (id: string) => void; activeSection: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleNavClick = (sectionId: string) => {
+    scrollToSection(sectionId);
+    setIsOpen(false);
+  };
+
+  return (
+    <div>
+      <button 
+        onClick={toggleMenu} 
+        className="flex flex-col justify-center items-center w-10 h-10"
+      >
+        <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white mb-1.5 transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white mb-1.5 transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
+        <span className={`block w-6 h-0.5 bg-slate-800 dark:bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+      </button>
+
+      <div className={`fixed inset-x-0 top-[60px] bg-white dark:bg-slate-900 shadow-lg transition-transform transform ${isOpen ? 'translate-y-0' : '-translate-y-full'} z-40`}>
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col space-y-4">
+            <button 
+              onClick={() => handleNavClick('home')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'home' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Home
+            </button>
+            <button 
+              onClick={() => handleNavClick('about')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'about' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              About
+            </button>
+            <button 
+              onClick={() => handleNavClick('education')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'education' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Education
+            </button>
+            <button 
+              onClick={() => handleNavClick('experience')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'experience' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Experience
+            </button>
+            <button 
+              onClick={() => handleNavClick('projects')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'projects' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => handleNavClick('skills')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'skills' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Skills
+            </button>
+            <button 
+              onClick={() => handleNavClick('contact')} 
+              className={`text-left px-4 py-2 rounded-md ${activeSection === 'contact' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/30 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-300'}`}
+            >
+              Contact
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
