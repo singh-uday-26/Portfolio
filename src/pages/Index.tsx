@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -7,7 +6,6 @@ import { Github, Linkedin, Mail, Code, FileText } from "lucide-react";
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
   
-  // Handle scroll to update active section
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
@@ -216,31 +214,27 @@ const Index = () => {
                   <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
                     Vellore Institute of Technology (VIT-AP University)
                   </h3>
-                  <span className="mt-1 md:mt-0 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full">
-                    2023 - 2027
-                  </span>
-                </div>
-                <p className="text-lg font-medium mb-1 text-slate-700 dark:text-slate-300">
-                  B.Tech in Computer Science and Engineering
-                </p>
-                <p className="text-slate-600 dark:text-slate-400 mb-6">
-                  CGPA: 8.21
-                </p>
-                <div>
-                  <h4 className="text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Core Focus Areas</h4>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                      Data Structures & Algorithms
-                    </span>
-                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                      Object-Oriented Programming
-                    </span>
-                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                      Database Systems
-                    </span>
-                    <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                      Software Engineering
-                    </span>
+                  <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full mb-2">2023 - 2027</span>
+                  <p className="text-slate-600 dark:text-slate-400 font-medium">B.Tech in Computer Science and Engineering</p>
+                  <p className="text-slate-600 dark:text-slate-400 mb-6">
+                    CGPA: 8.91
+                  </p>
+                  <div>
+                    <h4 className="text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Core Focus Areas</h4>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                        Data Structures & Algorithms
+                      </span>
+                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                        Object-Oriented Programming
+                      </span>
+                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                        Database Systems
+                      </span>
+                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
+                        Software Engineering
+                      </span>
+                    </div>
                   </div>
                 </div>
               </CardContent>
