@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Github, Linkedin, Mail, Code, FileText } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import SkillTag from "@/components/SkillTag";
+import EducationCard from "@/components/EducationCard";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -35,7 +38,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white dark:from-slate-900 dark:to-slate-800 transition-colors duration-500">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -207,38 +210,7 @@ const Index = () => {
           </h2>
           
           <div className="max-w-3xl mx-auto">
-            <Card className="relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-indigo-500 to-purple-500"></div>
-              <CardContent className="p-6 ml-4">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200">
-                    Vellore Institute of Technology (VIT-AP University)
-                  </h3>
-                  <span className="inline-block px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-300 text-sm font-medium rounded-full mb-2">2023 - 2027</span>
-                  <p className="text-slate-600 dark:text-slate-400 font-medium">B.Tech in Computer Science and Engineering</p>
-                  <p className="text-slate-600 dark:text-slate-400 mb-6">
-                    CGPA: 8.91
-                  </p>
-                  <div>
-                    <h4 className="text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Core Focus Areas</h4>
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                        Data Structures & Algorithms
-                      </span>
-                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                        Object-Oriented Programming
-                      </span>
-                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                        Database Systems
-                      </span>
-                      <span className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm rounded-full">
-                        Software Engineering
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <EducationCard />
           </div>
         </div>
       </section>
@@ -375,7 +347,7 @@ const Index = () => {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-24 bg-slate-50 dark:bg-slate-900/50">
+      <section id="skills" className="py-24 bg-purple-50/50 dark:bg-slate-900/50 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-slate-800 dark:text-slate-200">
             Core Skills
@@ -395,109 +367,91 @@ const Index = () => {
                 </TabsTrigger>
               </TabsList>
               
-              <TabsContent value="technical" className="p-4">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Programming Languages</h3>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      <SkillTag name="Python" level={90} />
-                      <SkillTag name="R" level={75} />
-                      <SkillTag name="Java" level={85} />
-                      <SkillTag name="SQL" level={80} />
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Web Development</h3>
-                    <div className="flex flex-wrap gap-2">
-                      <SkillTag name="HTML/CSS" level={85} />
-                      <SkillTag name="JavaScript" level={82} />
-                      <SkillTag name="React" level={78} />
-                      <SkillTag name="Node.js" level={75} />
-                    </div>
+              <TabsContent value="technical" className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Programming Languages</h3>
+                  <div className="space-y-4">
+                    <SkillTag name="Python" level={90} />
+                    <SkillTag name="Java" level={85} />
+                    <SkillTag name="JavaScript" level={82} />
+                    <SkillTag name="SQL" level={80} />
                   </div>
-                  
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Tools & Technologies</h3>
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      <SkillTag name="Git" level={88} />
-                      <SkillTag name="Docker" level={70} />
-                      <SkillTag name="AWS" level={65} />
-                      <SkillTag name="JIRA" level={75} />
-                    </div>
-                    
-                    <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Databases</h3>
-                    <div className="flex flex-wrap gap-2">
-                      <SkillTag name="MySQL" level={85} />
-                      <SkillTag name="MongoDB" level={75} />
-                      <SkillTag name="PostgreSQL" level={70} />
-                    </div>
+                </div>
+                
+                <div className="space-y-6">
+                  <h3 className="text-xl font-semibold mb-4 text-slate-800 dark:text-slate-200">Web Development</h3>
+                  <div className="space-y-4">
+                    <SkillTag name="React" level={85} />
+                    <SkillTag name="Node.js" level={80} />
+                    <SkillTag name="HTML/CSS" level={90} />
+                    <SkillTag name="TypeScript" level={75} />
                   </div>
                 </div>
               </TabsContent>
               
               <TabsContent value="soft">
                 <div className="grid md:grid-cols-2 gap-8">
-                  <Card>
+                  <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
                     <CardContent className="p-6">
-                      <ul className="space-y-3">
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Clear Communication</span>
-                        </li>
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Analytical Thinking</span>
-                        </li>
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Research</span>
-                        </li>
-                      </ul>
+                      <div className="space-y-4">
+                        <SkillTag name="Communication" level={95} />
+                        <SkillTag name="Team Leadership" level={85} />
+                        <SkillTag name="Problem Solving" level={90} />
+                        <SkillTag name="Time Management" level={88} />
+                      </div>
                     </CardContent>
                   </Card>
                   
-                  <Card>
+                  <Card className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
                     <CardContent className="p-6">
-                      <ul className="space-y-3">
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Presentation</span>
-                        </li>
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Team Collaboration</span>
-                        </li>
-                        <li className="flex items-center">
-                          <div className="w-2 h-2 bg-indigo-500 rounded-full mr-2"></div>
-                          <span className="text-slate-700 dark:text-slate-300">Problem Solving</span>
-                        </li>
-                      </ul>
+                      <div className="space-y-4">
+                        <SkillTag name="Adaptability" level={92} />
+                        <SkillTag name="Critical Thinking" level={88} />
+                        <SkillTag name="Creativity" level={85} />
+                        <SkillTag name="Project Management" level={87} />
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
               </TabsContent>
               
               <TabsContent value="certifications">
-                <div className="space-y-4">
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">Business Communication</h3>
-                      <p className="text-slate-600 dark:text-slate-400">Coursera</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">Excel for Business: Essentials</h3>
-                      <p className="text-slate-600 dark:text-slate-400">Macquarie University</p>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardContent className="p-6">
-                      <h3 className="font-medium text-lg mb-1 text-slate-800 dark:text-slate-200">HR Management Foundations</h3>
-                      <p className="text-slate-600 dark:text-slate-400">LinkedIn Learning</p>
-                    </CardContent>
-                  </Card>
+                <div className="grid gap-6">
+                  {[
+                    {
+                      title: "Business Communication",
+                      provider: "Coursera",
+                      date: "2024",
+                      credentialId: "BC123456"
+                    },
+                    {
+                      title: "Excel for Business: Essentials",
+                      provider: "Macquarie University",
+                      date: "2023",
+                      credentialId: "EBE789012"
+                    },
+                    {
+                      title: "HR Management Foundations",
+                      provider: "LinkedIn Learning",
+                      date: "2023",
+                      credentialId: "HRM345678"
+                    }
+                  ].map((cert) => (
+                    <Card key={cert.credentialId} className="transform transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
+                      <CardContent className="p-6">
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                          <div>
+                            <h3 className="font-semibold text-lg text-slate-800 dark:text-slate-200">{cert.title}</h3>
+                            <p className="text-slate-600 dark:text-slate-400">{cert.provider}</p>
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <span className="text-sm text-slate-500 dark:text-slate-400">{cert.date}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">ID: {cert.credentialId}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
                 </div>
               </TabsContent>
             </Tabs>
