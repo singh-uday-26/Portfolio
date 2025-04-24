@@ -71,7 +71,7 @@ const ContactForm = () => {
   
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
+      <div className="group">
         <input
           type="text"
           name="name"
@@ -79,11 +79,11 @@ const ContactForm = () => {
           onChange={handleChange}
           placeholder="Your Name"
           required
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60 transition-all duration-300 group-hover:bg-white/15"
         />
       </div>
       
-      <div>
+      <div className="group">
         <input
           type="email"
           name="email"
@@ -91,11 +91,11 @@ const ContactForm = () => {
           onChange={handleChange}
           placeholder="Your Email"
           required
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60 transition-all duration-300 group-hover:bg-white/15"
         />
       </div>
       
-      <div>
+      <div className="group">
         <textarea
           name="message"
           value={formData.message}
@@ -103,7 +103,7 @@ const ContactForm = () => {
           placeholder="Your Message"
           required
           rows={4}
-          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60 resize-none"
+          className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-white/30 text-white placeholder-white/60 resize-none transition-all duration-300 group-hover:bg-white/15"
         />
       </div>
       
@@ -121,7 +121,7 @@ const ContactForm = () => {
       
       <Button
         type="submit"
-        className="w-full bg-white hover:bg-white/90 text-indigo-700 font-medium py-3"
+        className="w-full bg-white hover:bg-white/90 text-indigo-700 font-medium py-3 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
         disabled={isSubmitting || !formData.consent}
       >
         {isSubmitting ? 'Sending...' : 'Send Message'}
