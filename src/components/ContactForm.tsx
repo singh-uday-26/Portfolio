@@ -34,6 +34,20 @@ const ContactForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
+      return;
+    }
+    
+    console.log("Submitting form data:", formData);
+    
     try {
       const { error } = await supabase
         .from('contact_submissions')
@@ -43,6 +57,8 @@ const ContactForm = () => {
           message: formData.message,
           consent: formData.consent
         }]);
+        
+      console.log("Supabase response:", error ? `Error: ${error.message}` : "Success");
         
       if (error) throw error;
       
