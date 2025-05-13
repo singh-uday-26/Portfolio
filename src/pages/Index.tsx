@@ -3,6 +3,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/sections/HeroSection';
 import Footer from '@/components/Footer';
+import { Toaster } from "@/components/ui/toaster";
 
 // Lazy load non-critical sections for better performance
 const AboutSection = lazy(() => import('@/components/sections/AboutSection'));
@@ -98,6 +99,9 @@ const Index = () => {
           <p className="text-indigo-600 dark:text-indigo-400">Loading portfolio...</p>
         </div>
       </div>
+      
+      {/* Global toast notifications */}
+      <Toaster />
     </div>
   );
 };

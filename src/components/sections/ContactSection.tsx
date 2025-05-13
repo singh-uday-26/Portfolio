@@ -2,12 +2,13 @@
 import { Github, Linkedin, Mail, Phone } from 'lucide-react';
 import ContactForm from "@/components/ContactForm";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Toaster } from "@/components/ui/toaster";
 
 const ContactSection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
+    <section id="contact" className="py-24 bg-gradient-to-br from-indigo-600 to-purple-700 text-white relative">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
           Get In Touch
@@ -83,6 +84,7 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </section>
   );
 };
